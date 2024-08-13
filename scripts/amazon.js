@@ -1,5 +1,6 @@
 import {cart} from '../data/cart.js';
 import { products } from '../data/products.js';
+import { addToCart } from '../data/cart.js';
 let productHTML='';
 products.forEach((product)=>{
   productHTML+=`
@@ -54,31 +55,21 @@ products.forEach((product)=>{
   `;
 })
 document.querySelector('.js-products-grid').innerHTML=productHTML;
-document.querySelectorAll('.js-add-to-cart')
- .forEach((button)=>{
-  button.addEventListener('click',()=>{
-    const productId=button.dataset.productId;//this will return the dataset in the buton like the id in here
-    let matchingItem;
-    cart.forEach((item)=>{
-      if(productId===item.productId){
-        matchingItem=item;
-      }
-    })
-    const quantityElement=document.querySelector(`.js-quantity-selector-${productId}`);
-    const quantity=Number(quantityElement.value);
-    if(matchingItem){
-      matchingItem.quantity+=quantity;
-    }
-    else{
-      cart.push({
-        productId:productId,
-        quantity:quantity
-      })
-    }
-    let carQuantity=0;
-    cart.forEach((item)=>{
-      carQuantity+=item.quantity;
+
+
+function updateCartQuantity(){
+  let carQuantity=0;
+    cart.forEach((cartItem)=>{
+      carQuantity+=cartItem.quantity;
     })
     document.querySelector('.js-cart-quantity').innerHTML=carQuantity;
+}
+
+document.querySelectorAll('.js-add-to-cart')
+ .forEach((button)=>{
+  button.addEventListener('click',()=>{ //the first part 'click' is adding the type of event to listen for,the second part is the callback that happens when we click the button
+    const productId=button.dataset.productId;//this will return the dataset in the buton like the id in here
+    addToCart(productId);
+    updateCartQuantity();
   })
 })
