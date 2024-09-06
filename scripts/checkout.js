@@ -1,7 +1,10 @@
-import {cart,removeFromCart} from '../data/cart.js';
+import '../data/cart-class.js';
 import { products } from '../data/products.js';
 import { formatCurrecny } from './utils/money.js';
 
+const now=dayjs();
+const days=now.add(7,'days');
+console.log(days);
 let cartSummaryHTML='';
 cart.forEach((cartItem)=>{
   const productId=cartItem.productId
@@ -101,3 +104,6 @@ document.querySelectorAll('.js-delete').forEach((link)=>{
     container.remove();
   });
 })
+const cartQuantity = calculateCartQuantity();
+document.querySelector('.js-return-to-home-link')
+  .innerHTML = `${cartQuantity} items`;
