@@ -71,3 +71,4 @@ document.querySelectorAll('.js-add-to-cart')
     updateCartQuantity();
   })
 })
+window.onload(updateCartQuantity());
