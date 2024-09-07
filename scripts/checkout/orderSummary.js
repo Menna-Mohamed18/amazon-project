@@ -108,8 +108,8 @@ export function renderOrderSummary(){
   });
 
   const cartQuantity = calculateCartQuantity();
-  document.querySelector('.js-return-to-home-link')
-    .innerHTML = `${cartQuantity} items`;
+  // document.querySelector('.js-return-to-home-link')
+  //   .innerHTML = `${cartQuantity} items`;
 
   document.querySelectorAll('.js-delivery-option').forEach((elemnt)=>{
     elemnt.addEventListener('click',()=>{
